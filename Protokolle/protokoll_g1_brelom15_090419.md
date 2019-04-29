@@ -60,13 +60,15 @@ Um die Daten aus dem ADCH Register in eine Temperatur um zu rechen, wird eine Fo
 Da diese einen linearen Zusammenhand besitzen, kann dessen Grundform "y = k*x + d" verwendet werden.  
 --> T = ADCH * k + d
 
-Aus den folgenden Messwerten ergibt sich für k der Wert 1024 und für d -82688;
+Aus den folgenden Werten ergibt sich für k der Wert 1024 und für d -82688;
 
 |ADCH    | mbInputRegister|
 |--------|----------------|
 |68      |	-11520	      |
 |87      |	6400	        |
 |102     |	21760	        |
+
+Die Werte im mbInputRegister ergeben sich indem man die Temperatur aus der Vorherugen Tabelle mit 2^8 multipliziert.  
 
 Umsetzung in C:
 ```C
