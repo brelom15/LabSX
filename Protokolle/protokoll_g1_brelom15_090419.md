@@ -16,7 +16,7 @@ Gruppe: 1
 ## 1. Temperatursensor Specifikationen   
 
 
-|Temperatur|-45°   |25°    | 85°  |
+|Temperatur|-45°C  |25°C   | 85°C |
 |----------|-------|-------|------|
 | Spannung |242 mV | 314 mV|380 mV|
 |  ADCH    | 56,79 | 73,08 |88,4  |
@@ -31,14 +31,20 @@ unter dem Karpitel "ADC" nachgelesen werden.
 ```C
 void app_init (void) {  
   memset((void * )&app, 0, sizeof(app));  
-  ADMUX = 8; //Um den Multiplexer im ADC auf den Temperatursensor zu legen    
-  ADMUX |= (1 << REFS1) | (1 << REFS0); // Die Referenzspannung für die Abtastung wird auf die Interne 1.1 Volt Referenz gelegt
+  ADMUX = 8;     
+  ADMUX |= (1 << REFS1) | (1 << REFS0);
   ADMUX |= (1 << ADLAR); //Um den 10Bit Wert im 16 Bit Register Linksbündig abzulegen  
 
   ADCSRA |= (1 << ADEN) | 7; //Stellt die Abtastfrequenz im ADC auf 125 kHz (Prescaler)   
   ADCSRB = 0; //Zur sicherheit  
 }  
 ```
+
+**Beschreibung:**  
+ADMUX wird auf 8 gesetzt um den Multiplexer im ADC auf den Temperatursensor zu legen.  
+Um anschließend die Referenzspannung auf die internen Referenz zu stellen wuss das REFS1 und das REFS0 bit gesetzt werden.  
+Da der 10 Bit Wert im 16 Bit Register linksbündig abgespeichert werden soll, muss das ADLAR Bit gesetzt werden.  
+Abschließnd muss das ADCSRA Register noch verändert werden, um die Abtastfrequenz auf dir gewünschten 125 kHz zu stellen.  
 
 
 ## 3. Kalibrierung
@@ -47,7 +53,7 @@ Um die Daten aus dem ADCH Register in eine Temperatur um zu rechen, wird eine Fo
 Da diese einen linearen Zusammenhand besitzen, kann dessen Grundform "y = k*x + d" verwendet werden.  
 --> T = ADCH * k + d
 
-Aus den folgenden Messwerten ergibt sich für k der Wert 1024 und für d 96000;
+Aus den folgenden Messwerten ergibt sich für k der Wert 1024 und für d -82688;
 
 |gemessen| Temperatur|
 |--------|-----------|
@@ -63,7 +69,7 @@ void app_main (void) {
 
    int16_t mbInputRegister;
    int32_t k = 1024;
-   int32_t d = -96000;
+   int32_t d = -82688;
 
    int32_t x = k * ADCH + d;
 
@@ -79,3 +85,8 @@ void app_main (void) {
 }
 
 ```
+
+**Beschreibung:**  
+Als Erstes muss das ADSC Bit im ADCSRA Register gesetzt werden um die Konversation mit dem ADC zu starten.
+Anschließend wird mit Hilfe der obig berechneten Formel der Wert berechnet der letztlich über Modbus übertragen wird.
+Falls die Werte die maxialen Werte des 32 Bit Integers überschreiten, werden diese auf die maximal zulässigen überschrieben.
