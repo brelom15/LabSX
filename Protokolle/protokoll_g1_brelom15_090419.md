@@ -7,14 +7,21 @@ Gruppe: 1
 
 ---
 ## Inhalte
-1. Temperatursensor Specifikationen
+1. Prinzip und Temperatursensor Specifikationen
 2. Konfiguration der Register
 3. Kalibrierung
 ---
 
 
-## 1. Temperatursensor Specifikationen   
+## 1. Prinzip und Temperatursensor Specifikationen   
 
+In unserem Fall übernimmt der PC die Aufgabe des Clients und der µC die Aufgabe des Servers.
+Somit schickt der PC eine Rquest (wie in Protokoll 5 beschrieben ) an den Server. War diese korrekt wird eine Response mit dem Temperaturwärt zurück geschickt.  
+
+
+### Temperatursensor Specifikationen   
+Die Temperaturmessung basiert auf einem chipintegrierten Temperatursensor. Bei der Temperatursensormessung muss auch die interne 1,1 V Spannungsreferenz für die ADC-Spannungsreferenzquelle ausgewählt werden. Wenn der Temperatursensor aktiviert ist, kann der ADC-Wandler im Einzelumwandlungsmodus verwendet werden, um die Spannung über dem Temperatursensor zu messen. Hierbei ändert sich der Temperaturwert pro mV im 1 °C.  
+Weiteres lassen sich die Werte im ADCH Register über die Formel ADCH = Vin * 256 / Vref berechnen.  
 
 |Temperatur|-45°C  |25°C   | 85°C |
 |----------|-------|-------|------|
@@ -33,9 +40,9 @@ void app_init (void) {
   memset((void * )&app, 0, sizeof(app));  
   ADMUX = 8;     
   ADMUX |= (1 << REFS1) | (1 << REFS0);
-  ADMUX |= (1 << ADLAR); //Um den 10Bit Wert im 16 Bit Register Linksbündig abzulegen  
+  ADMUX |= (1 << ADLAR);  
 
-  ADCSRA |= (1 << ADEN) | 7; //Stellt die Abtastfrequenz im ADC auf 125 kHz (Prescaler)   
+  ADCSRA |= (1 << ADEN) | 7;   
   ADCSRB = 0; //Zur sicherheit  
 }  
 ```
@@ -55,11 +62,11 @@ Da diese einen linearen Zusammenhand besitzen, kann dessen Grundform "y = k*x + 
 
 Aus den folgenden Messwerten ergibt sich für k der Wert 1024 und für d -82688;
 
-|gemessen| Temperatur|
-|--------|-----------|
-|68      |	-11520	 |
-|87      |	6400	   |
-|102     |	21760	   |
+|ADCH    | mbInputRegister|
+|--------|----------------|
+|68      |	-11520	      |
+|87      |	6400	        |
+|102     |	21760	        |
 
 Umsetzung in C:
 ```C
@@ -83,7 +90,6 @@ void app_main (void) {
 
    printf("ADCH --> %u    Reg 1: %d\r",ADCH, mbInputRegister);
 }
-
 ```
 
 **Beschreibung:**  
