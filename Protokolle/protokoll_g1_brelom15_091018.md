@@ -1,11 +1,11 @@
-# Protokoll1 (08.10.2018)
+# Protokoll 1 (08.10.2018)
 
 Name: Breitenthaler Lorenz  
 Klasse: 4ahme  
 KNR: 1  
 Gruppe: 1
 
---- 
+---
 
 ## Inhalte
 
@@ -17,7 +17,7 @@ Gruppe: 1
     *3.1. Linux Terminal*  
     *3.2. Git spezifische Befehle*  
 
---- 
+---
 
 ## 1.Versionsverwaltung
 
@@ -43,9 +43,9 @@ Zur leichteren Bedienung kann man das Sogenannte [Cheatsheet](https://github.com
 
 ### 2.2. Erstellen einer Repository
 
-Um eine neue Repository zu erstellen muss man auf der GitHub Homepage einfach nur auf "Neue Repository erstellen" drücken. Hierbei hat man ein paar Optionen zur Verfügung. Als erstes kann man wählen ob man eine public oder private Repository erwünscht. Anschließend kann man eine "README.me" Datei erstellen lassen um sein Projekt zu beschreiben. Zum Abschluss kann man noch eine "LICENCE" hinzufügen um sich rechtlich abzusichern und eine ".gitignore" Datei erstellen mit welcher nicht relevante Dateien von der Remote-Repository ignoriert werden. 
+Um eine neue Repository zu erstellen muss man auf der GitHub Homepage einfach nur auf "Neue Repository erstellen" drücken. Hierbei hat man ein paar Optionen zur Verfügung. Als erstes kann man wählen ob man eine public oder private Repository erwünscht. Anschließend kann man eine "README.me" Datei erstellen lassen um sein Projekt zu beschreiben. Zum Abschluss kann man noch eine "LICENCE" hinzufügen um sich rechtlich abzusichern und eine ".gitignore" Datei erstellen mit welcher nicht relevante Dateien von der Remote-Repository ignoriert werden.
 
-In unserem Übungsbeispiel habe wir ein öffentliches Projekt mit einer README.md Datei, einer einfachen LICENCE und einer auf C-Programme zugeschnittenen .gitignore Datei erstellt. 
+In unserem Übungsbeispiel habe wir ein öffentliches Projekt mit einer README.md Datei, einer einfachen LICENCE und einer auf C-Programme zugeschnittenen .gitignore Datei erstellt.
 
 ## 3.1 Umgang mit dem Linux Terminal
 
