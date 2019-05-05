@@ -1,9 +1,9 @@
-# Protokoll 7 (09.04.2019)
+# Protokoll 7 (09.04.2019)  
 
-Name: Breitenthaler Lorenz
-Klasse: 4ahme
-KNR: 1
-Gruppe: 1
+Name: Breitenthaler Lorenz  
+Klasse: 4ahme  
+KNR: 1  
+Gruppe: 1  
 
 ---
 ## Inhalte
@@ -44,7 +44,7 @@ void app_main (void) {
 
 
 
-   if(ADCH <= 88){
+   if(ADCH <= 88) { //Zuteilung der Werte zur passenden Gerade
       mrb = k1 * ADCH + d1;
    }else if (ADCH > 88 ){
       mrb = k1 * ADCH + d1;
