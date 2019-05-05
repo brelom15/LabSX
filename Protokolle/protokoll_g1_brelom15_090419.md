@@ -68,7 +68,7 @@ Aus den folgenden Werten ergibt sich für k der Wert 1024 und für d -82688;
 |87      |	6400	        |
 |102     |	21760	        |
 
-Die Werte im mbInputRegister ergeben sich indem man die Temperatur aus der Vorherugen Tabelle mit 2^8 multipliziert.  
+Die Werte im mbInputRegister ergeben sich indem man die Temperatur aus der vorherigen Tabelle mit 2^8 multipliziert.  
 
 Umsetzung in C:
 ```C
